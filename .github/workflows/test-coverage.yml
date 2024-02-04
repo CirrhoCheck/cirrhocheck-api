@@ -1,5 +1,11 @@
 name: Test and Coverage
 
+on:
+  push:
+    branches:
+      - main
+      - development
+      
 jobs:
   test_project:
     runs-on: ubuntu-latest
