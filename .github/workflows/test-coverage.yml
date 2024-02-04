@@ -1,3 +1,5 @@
+name: Test and Coverage
+
 jobs:
   test_project:
     runs-on: ubuntu-latest
@@ -10,12 +12,12 @@ jobs:
         uses: actions/setup-python@v2
       
       - name: Set up environment variables
-        env:
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_PORT: ${{ secrets.DB_PORT }}
+        run: |
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> $GITHUB_ENV
+          echo "DB_USER=${{ secrets.DB_USER }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> $GITHUB_ENV
       
       - name: Install dependencies
         run: |
