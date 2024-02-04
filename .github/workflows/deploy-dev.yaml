@@ -41,4 +41,4 @@ jobs:
           GCP_ZONE: ${{ secrets.DEVELOPMENT_GCP_INSTANCE_ZONE }}
         run: |
           gcloud config set project $GCP_PROJECT_ID
-          gcloud compute ssh $GCP_INSTANCE_NAME --zone=$GCP_ZONE --command "cd /home/rifqi_farel/cirrhocheck && git pull origin main && python manage.py collectstatic --noinput"
+          gcloud compute ssh $GCP_INSTANCE_NAME --zone=$GCP_ZONE --command "sudo su && cd .. && cd cirrho_check && git pull origin main && python manage.py collectstatic --noinput"
