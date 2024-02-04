@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,6 +35,7 @@ ALLOWED_HOSTS = ['*']
 
 CIRRHOCHECK_APPS = [
     'administration',
+    'commons',
 ]
 
 LIBRARY_APPS = [
@@ -144,6 +148,8 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static"
+
+# AUTH_USER_MODEL = "administration.User"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
