@@ -29,15 +29,4 @@ jobs:
           cd /home/rifqi_farel/cirrhocheck-api && git switch development &&
           git pull origin development && python3 -m pip install --upgrade pip && 
           python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt &&
-          python3 manage.py migrate"
-      
-      - name: Restart gunicorn and nginx
-        env:
-          GCP_SSH_PRIVATE_KEY: ${{ secrets.DEVELOPMENT_GCP_SSH_PRIVATE_KEY }}
-          GCP_USERNAME: ${{ secrets.DEVELOPMENT_GCP_USERNAME }}
-          GCP_STATIC_IP: ${{ secrets.DEVELOPMENT_GCP_STATIC_IP }}
-        run: |
-          echo "$GCP_SSH_PRIVATE_KEY" > ssh_key.pem
-          chmod 600 ssh_key.pem
-          ssh -o StrictHostKeyChecking=no -i ssh_key.pem $GCP_USERNAME@$GCP_STATIC_IP "
-          sudo systemctl restart gunicorn && sudo systemctl restart nginx"
+          python3 manage.py migrate && sudo systemctl restart gunicorn"
