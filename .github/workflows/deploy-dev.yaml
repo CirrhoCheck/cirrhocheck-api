@@ -19,19 +19,20 @@ jobs:
       - name: Authenticate with GCP
         env:
           GCP_AUTH_JSON: ${{ secrets.DEVELOPMENT_GCP_AUTH_JSON }}
-        run: |
-          echo "$GCP_AUTH_JSON" > gcp-auth.json
-          gcloud auth activate-service-account --key-file=gcp-auth.json
-          rm gcp-auth.json
+        script:
+          - echo "$GCP_AUTH_JSON" > gcp-auth.json
+          - gcloud auth activate-service-account --key-file=gcp-auth.json
+          - rm gcp-auth.json
 
       - name: Deploy to GCP VM Instance
         env:
           GCP_SSH_PRIVATE_KEY: ${{ secrets.DEVELOPMENT_GCP_SSH_PRIVATE_KEY }}
           GCP_USERNAME: ${{ secrets.DEVELOPMENT_GCP_USERNAME }}
           GCP_STATIC_IP: ${{ secrets.DEVELOPMENT_GCP_STATIC_IP }}
-        run: |
-          chmod 400 $GCP_SSH_PRIVATE_KEY
-          ssh -o StrictHostKeyChecking=no -i $GCP_SSH_PRIVATE_KEY $GCP_USERNAME@$GCP_STATIC_IP "
+        before_script:
+          - chmod 400 $GCP_SSH_PRIVATE_KEY
+        script:
+          - ssh -o StrictHostKeyChecking=no -i $GCP_SSH_PRIVATE_KEY $GCP_USERNAME@$GCP_STATIC_IP "
           sudo su && cd /home/rifqi_farel/cirrhocheck-api && git pull origin main && 
           python -m pip install --upgrade pip && pip install -r requirements.txt && 
           python manage.py migrate && python manage.py collectstatic --noinput && 
