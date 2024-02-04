@@ -56,7 +56,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Pull image and run container
-        uses: appleboy/ssh-action@v0.1.10
         env:
           GCP_SSH_PRIVATE_KEY: ${{ secrets.DOCKER_GCP_SSH_PRIVATE_KEY }}
           GCP_USERNAME: ${{ secrets.DOCKER_GCP_USERNAME }}
