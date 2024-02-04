@@ -1,6 +1,6 @@
 from django.urls import path
-from . import views
+from api.views import GetDummyItemAPI
 
 urlpatterns = [
-    path('', views.getDummyItem),
+    path('', GetDummyItemAPI.as_view(), name='get-dummy-item'),
 ]
