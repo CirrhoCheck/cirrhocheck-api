@@ -30,7 +30,7 @@ jobs:
           GCP_USERNAME: ${{ secrets.DEVELOPMENT_GCP_USERNAME }}
           GCP_STATIC_IP: ${{ secrets.DEVELOPMENT_GCP_STATIC_IP }}
         run: |
-          echo "$SSH_PRIVATE_KEY" > ssh_key.pem
+          echo "$GCP_SSH_PRIVATE_KEY" > ssh_key.pem
           chmod 600 ssh_key.pem
           ssh -o StrictHostKeyChecking=no -i ssh_key.pem $GCP_USERNAME@$GCP_STATIC_IP "
           sudo su && cd /home/rifqi_farel/cirrhocheck-api && git pull origin main && 
