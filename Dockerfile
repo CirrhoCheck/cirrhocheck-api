@@ -16,14 +16,14 @@ ENV DB_PORT ${DB_PORT}
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY requirements.txt requirements.txt
 
 RUN python -m venv venv && \
     . venv/bin/activate && \
     python -m pip install --upgrade pip \
-    pip install -r requirements.txt
+    pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
 EXPOSE 8000
-CMD ["sh", "-c", "python manage.py migrate && gunicorn cirrhocheck:cirrhocheck -b 0.0.0.0:8000"]
+CMD ["sh", "-c", ". venv/bin/activate && python manage.py migrate && gunicorn --bind 0.0.0.0:8000 cirrhocheck.wsgi"]
