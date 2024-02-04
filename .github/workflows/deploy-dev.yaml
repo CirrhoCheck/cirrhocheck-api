@@ -1,0 +1,44 @@
+name: Automated Deployment to Development
+on:
+  push:
+    branches:
+      - development
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Authenticate with GCP
+        env:
+          GCP_AUTH_JSON: ${{ secrets.DEVELOPMENT_GCP_AUTH_JSON }}
+        run: |
+          echo "$GCP_AUTH_JSON" > gcp-auth.json
+          gcloud auth activate-service-account --key-file=gcp-auth.json
+          rm gcp-auth.json
+
+      - name: Setup Database
+        env:
+          DJANGO_SETTINGS_MODULE: "cirrhocheck.settings"
+          GCP_PROJECT_ID: ${{ secrets.DEVELOPMENT_GCP_PROJECT_ID }}
+        run: |
+          gcloud config set project $GCP_PROJECT_ID
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          python manage.py migrate
+
+      - name: Deploy to GCP VM Instance
+        env:
+          GCP_PROJECT_ID: ${{ secrets.DEVELOPMENT_GCP_PROJECT_ID }}
+          GCP_INSTANCE_NAME: ${{ secrets.DEVELOPMENT_GCP_INSTANCE_NAME }}
+          GCP_ZONE: ${{ secrets.DEVELOPMENT_GCP_INSTANCE_ZONE }}
+        run: |
+          gcloud config set project $GCP_PROJECT_ID
+          gcloud compute ssh $GCP_INSTANCE_NAME --zone=$GCP_ZONE --command "cd /path/to/your/django/project && git pull origin main && python manage.py collectstatic --noinput"
