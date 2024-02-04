@@ -24,21 +24,14 @@ jobs:
           gcloud auth activate-service-account --key-file=gcp-auth.json
           rm gcp-auth.json
 
-      - name: Setup Database
-        env:
-          DJANGO_SETTINGS_MODULE: "cirrhocheck.settings"
-          GCP_PROJECT_ID: ${{ secrets.DEVELOPMENT_GCP_PROJECT_ID }}
-        run: |
-          gcloud config set project $GCP_PROJECT_ID
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          python manage.py migrate
-
       - name: Deploy to GCP VM Instance
         env:
+          GCP_SSH_PRIVATE_KEY: ${{ secrets.DEVELOPMENT_GCP_SSH_PRIVATE_KEY }}
           GCP_PROJECT_ID: ${{ secrets.DEVELOPMENT_GCP_PROJECT_ID }}
           GCP_INSTANCE_NAME: ${{ secrets.DEVELOPMENT_GCP_INSTANCE_NAME }}
           GCP_ZONE: ${{ secrets.DEVELOPMENT_GCP_INSTANCE_ZONE }}
         run: |
+          echo "$GCP_SSH_PRIVATE_KEY" > ssh_key.pem
           gcloud config set project $GCP_PROJECT_ID
-          gcloud compute ssh $GCP_INSTANCE_NAME --zone=$GCP_ZONE --command "sudo su && cd .. && cd cirrho_check && git pull origin main && python manage.py collectstatic --noinput"
+          chmod 600 ssh_key.pem
+          gcloud compute ssh $GCP_INSTANCE_NAME --zone=$GCP_ZONE --command "sudo su && cd /home/cirrho_check && git pull origin main && python -m pip install --upgrade pip && pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput && python manage.py runserver"
