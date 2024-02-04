@@ -1,0 +1,31 @@
+name: Test and Coverage
+
+on:
+  push:
+    branches:
+      - main
+      - development
+
+jobs:
+  test_project:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout action
+        uses: actions/checkout@v2
+      
+      - uses: actions/setup-python@v2
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Run Test
+        run: |
+          python manage.py test
+        
+      - name: Django Coverage action
+        uses: actions/python-django-coverage-gitHub-action@0.9
+        with:
+          django-app: 'cirrhocheck-api'
+          minimum-coverage: '0'  # Set to 0 to indicate no minimum coverage requirement
