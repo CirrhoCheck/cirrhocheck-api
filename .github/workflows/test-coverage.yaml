@@ -6,7 +6,7 @@ on:
       - development
 jobs:
   test:
-    name: Test and Coverage
+    name: Testing and Coverage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout action
@@ -36,7 +36,10 @@ jobs:
       - name: Test coverage
         run: |
           coverage report
+          coverage xml -o coverage.xml
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: coverage.xml
+
