@@ -23,6 +23,6 @@ In response to this pressing issue, Group 1 PPL C has developed a Medical Calcul
 ### Sonar Cloud
 [Link to Sonar Cloud](https://sonarcloud.io/project/overview?id=CirrhoCheck_cirrhocheck-api)
 
-### Staging
+### Development
 [![Automated Deployment for Development](https://github.com/CirrhoCheck/cirrhocheck-api/actions/workflows/deploy-dev.yaml/badge.svg?branch=development)](https://github.com/CirrhoCheck/cirrhocheck-api/actions/workflows/deploy-dev.yaml)
-[![codecov](https://codecov.io/gh/CirrhoCheck/cirrhocheck-api/graph/badge.svg?token=47HS0J3AVR)](https://codecov.io/gh/CirrhoCheck/cirrhocheck-api)
+[![codecov](https://codecov.io/gh/CirrhoCheck/cirrhocheck-api/branch/development/graph/badge.svg?token=47HS0J3AVR)](https://codecov.io/gh/CirrhoCheck/cirrhocheck-api/branch/development)
