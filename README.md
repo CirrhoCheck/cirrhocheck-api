@@ -19,3 +19,6 @@ Consisted of:
 Cirrhosis stands as one of the most prevalent and serious health concerns in Indonesia. The disease, characterized by extensive scarring of the liver tissue, has been a persistent challenge in the country's healthcare landscape. With a high incidence rate and significant impact on the quality of life for affected individuals, there is a critical need for effective tools to assist healthcare professionals in managing and understanding cirrhosis.
 
 In response to this pressing issue, Group 1 PPL C has developed a Medical Calculator for Cirrhosis as part of their software engineering project. This tool aims to streamline and enhance the process of assessing cirrhosis severity, providing valuable insights for healthcare practitioners to make informed decisions. Leveraging data-driven approaches, our project seeks to contribute to the ongoing efforts to combat cirrhosis and improve the overall health outcomes in Indonesia.
+
+### Sonar Cloud
+[Link to Sonar Cloud](https://sonarcloud.io/project/overview?id=CirrhoCheck_cirrhocheck-api)
