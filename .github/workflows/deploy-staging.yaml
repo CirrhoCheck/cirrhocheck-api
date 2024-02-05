@@ -5,6 +5,20 @@ on:
     branches:
       - staging
 jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GIT_HUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+          SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
@@ -31,17 +45,3 @@ jobs:
           git pull origin staging && python3 -m pip install --upgrade pip && 
           python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt &&
           python3 manage.py migrate && sudo systemctl restart gunicorn"
-  sonarcloud:
-    name: SonarCloud
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@master
-        env:
-          GIT_HUB_TOKEN: ${{ secrets.GIT_HUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-          SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
