@@ -18,13 +18,10 @@ WORKDIR /app
 
 COPY requirements.txt requirements.txt
 
-RUN python -m venv venv && \
-    sh -c ". venv/bin/activate && \
-    pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt"
-
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
 EXPOSE 8000
-CMD ["sh", "-c", ". venv/bin/activate && python manage.py migrate && gunicorn --bind 0.0.0.0:8000 cirrhocheck.wsgi"]
+CMD ["sh", "-c", "python manage.py migrate && gunicorn --bind 0.0.0.0:8000 cirrhocheck.wsgi"]
