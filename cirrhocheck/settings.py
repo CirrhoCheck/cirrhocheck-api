@@ -55,15 +55,13 @@ INSTALLED_APPS = (
     + CIRRHOCHECK_APPS
 )
 
+DATE_FORMAT = '%Y-%m-%dT%H:%M:%S.%fZ'
+
 REST_FRAMEWORK = {
-    'DATE_FORMAT': '%Y-%m-%dT%H:%M:%S.%fZ',
-    'DATE_INPUT_FORMATS': [
-        '%Y-%m-%dT%H:%M:%S.%fZ',
-    ],
-    'DATETIME_FORMAT': '%Y-%m-%dT%H:%M:%S.%fZ',
-    'DATETIME_INPUT_FORMATS': [
-        '%Y-%m-%dT%H:%M:%S.%fZ',
-    ],
+    'DATE_FORMAT': DATE_FORMAT,
+    'DATE_INPUT_FORMATS': [DATE_FORMAT,],
+    'DATETIME_FORMAT': DATE_FORMAT,
+    'DATETIME_INPUT_FORMATS': [DATE_FORMAT,],
 }
 
 MIDDLEWARE = [
