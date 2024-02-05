@@ -26,4 +26,5 @@ RUN python -m venv venv && \
 COPY . .
 
 EXPOSE 8000
-CMD ["sh", "-c", ". venv/bin/activate && python manage.py migrate && gunicorn --bind 0.0.0.0:8000 cirrhocheck.wsgi"]
+# CMD ["sh", "-c", ". venv/bin/activate && python manage.py migrate && gunicorn --bind 0.0.0.0:8000 cirrhocheck.wsgi"]
+CMD ["/bin/bash"]
