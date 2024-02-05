@@ -1,4 +1,4 @@
-name: Automated Deployment for Production
+name: Automated Deployment for Production / Release
 
 on:
   push:
