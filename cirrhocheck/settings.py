@@ -40,6 +40,7 @@ CIRRHOCHECK_APPS = [
 
 LIBRARY_APPS = [
     'rest_framework',
+    'django_seed',
 ]
 
 INSTALLED_APPS = (
