@@ -23,5 +23,8 @@ RUN pip install --upgrade pip && \
 
 COPY . .
 
+RUN python manage.py collectstatic --noinput && \
+    python manage.py migrate
+
 EXPOSE 8000
-CMD ["sh", "-c", "python manage.py migrate && gunicorn --bind 0.0.0.0:8000 cirrhocheck.wsgi"]
+CMD ["sh", "-c", "gunicorn --workers 3 --bind 0.0.0.0:8000 cirrhocheck.wsgi"]
