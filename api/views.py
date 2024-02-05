@@ -10,6 +10,6 @@ class GetDummyItemAPI(APIView):
     permission_classes = (AllowAny,)
 
     def get(self, request: Request) -> Response:
-        dummyItems = DummyItem.objects.all()
-        serializer = DummyItemSerializer(dummyItems, many = True)
+        dummy_items = DummyItem.objects.all()
+        serializer = DummyItemSerializer(dummy_items, many = True)
         return Response(serializer.data)

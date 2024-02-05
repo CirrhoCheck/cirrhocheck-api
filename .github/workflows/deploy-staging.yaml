@@ -1,9 +1,9 @@
-name: Automated Deployment for Production / Release
+name: Automated Deployment for Staging
 
 on:
   push:
     branches:
-      - main
+      - staging
 jobs:
   sonarcloud:
     name: SonarCloud
@@ -22,6 +22,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -33,14 +34,14 @@ jobs:
 
       - name: Deploy to GCP VM Instance
         env:
-          GCP_SSH_PRIVATE_KEY: ${{ secrets.PRODUCTION_GCP_SSH_PRIVATE_KEY }}
-          GCP_USERNAME: ${{ secrets.PRODUCTION_GCP_USERNAME }}
-          GCP_STATIC_IP: ${{ secrets.PRODUCTION_GCP_STATIC_IP }}
+          GCP_SSH_PRIVATE_KEY: ${{ secrets.DEVELOPMENT_GCP_SSH_PRIVATE_KEY }}
+          GCP_USERNAME: ${{ secrets.DEVELOPMENT_GCP_USERNAME }}
+          GCP_STATIC_IP: ${{ secrets.DEVELOPMENT_GCP_STATIC_IP }}
         run: |
           echo "$GCP_SSH_PRIVATE_KEY" > ssh_key.pem
           chmod 600 ssh_key.pem
           ssh -o StrictHostKeyChecking=no -i ssh_key.pem $GCP_USERNAME@$GCP_STATIC_IP "
-          cd /home/rifqi_farel/cirrhocheck-api && git switch main &&
-          git pull origin main && python3 -m pip install --upgrade pip && 
+          cd /home/rifqi_farel/cirrhocheck-api && git switch staging &&
+          git pull origin staging && python3 -m pip install --upgrade pip && 
           python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt &&
           python3 manage.py migrate && sudo systemctl restart gunicorn"
