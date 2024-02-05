@@ -24,5 +24,6 @@ In response to this pressing issue, Group 1 PPL C has developed a Medical Calcul
 [Link to Sonar Cloud](https://sonarcloud.io/project/overview?id=CirrhoCheck_cirrhocheck-api)
 
 ### Development
-[![Automated Deployment for Development](https://github.com/CirrhoCheck/cirrhocheck-api/actions/workflows/deploy-dev.yaml/badge.svg?branch=development)](https://github.com/CirrhoCheck/cirrhocheck-api/actions/workflows/deploy-dev.yaml)
-[![codecov](https://codecov.io/gh/CirrhoCheck/cirrhocheck-api/branch/development/graph/badge.svg?token=47HS0J3AVR)](https://codecov.io/gh/CirrhoCheck/cirrhocheck-api/branch/development)
+[![Deployment for Development](https://github.com/CirrhoCheck/cirrhocheck-api/actions/workflows/deploy-dev.yaml/badge.svg?branch=development)](https://github.com/CirrhoCheck/cirrhocheck-api/actions/workflows/deploy-dev.yaml)
+[![Unit Testing and Coverage](https://github.com/CirrhoCheck/cirrhocheck-api/actions/workflows/test-coverage.yaml/badge.svg?branch=development)](https://github.com/CirrhoCheck/cirrhocheck-api/actions/workflows/test-coverage.yaml)
+[![Coverage Codecov](https://codecov.io/gh/CirrhoCheck/cirrhocheck-api/branch/development/graph/badge.svg?token=47HS0J3AVR)](https://codecov.io/gh/CirrhoCheck/cirrhocheck-api/branch/development)
