@@ -1,6 +1,17 @@
 [
 {
     "model": "administration.dummyitem",
+    "pk": "9f4b9795-60f6-4c8c-aabf-0f1ed16814b4",
+    "fields": {
+        "deleted": null,
+        "deleted_by_cascade": false,
+        "created_at": "2024-02-05T12:29:00Z",
+        "updated_at": "2024-02-05T12:29:00Z",
+        "description": "Hello World"
+    }
+},  
+{
+    "model": "administration.dummyitem",
     "pk": "138936a8-4818-4196-8f0a-9dbd019317cf",
     "fields": {
         "deleted": null,
